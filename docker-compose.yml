@@ -2,18 +2,21 @@ version: "3"
 
 services:
   db:
+    container_name: mariaDB
     hostname: mariaDB
     image: mariadb
     ports:
       - '3306:3306'
     volumes:
       - ./db-data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_ROOT_PASSWORD=pass
       - LANG=C.UTF-8
     restart: always
   
   web:
+    container_name: web
     hostname: web
     build: .
     command: sh -c "sleep 3; ./manage.py runserver 0.0.0.0:8000"
