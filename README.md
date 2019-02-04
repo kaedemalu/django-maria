@@ -1,3 +1,5 @@
+If you want to read in English, please scroll down.
+
 # このリポジトリについての説明
 このリポジトリはDjangoのプロジェクトをDockerを使って立ち上げるためのベースです。  
 公式ではPostgreSQLを使っていますが、ここではMariaDBを使って構築しています。  
@@ -37,3 +39,35 @@ root権限のユーザー名、メールアドレス、パスワードを聞か�
 パスワードについては短くても作成できますが(ex: pass)、怒られます。  
 http://0.0.0.0:8000/admin  
 上記にアクセスし、設定したユーザー名、パスワードを入力しアクセスできるか確認する。  
+
+# Description about this repository.
+This repository is a base of Django project that use with Docker.  
+Official tutorial uses PostgreSQL but this repository uses MariaDB.  
+  
+## Settings
+### Clone this repository
+Clone this repository that use following command.  
+```shell
+$ git clone https://github.com/kaedemalu/django-maria.git # use https
+```
+### Initial settings of Database  
+Type following commnands.  
+```shell
+$ docker-compose up db -d
+$ docker-compose run web python3 ./manage.py makemigrations
+$ docker-compose run web python3 ./manage.py migrate
+```
+### Start up web container and display page.
+```shell
+$ docker-compose up web -d
+```
+Access to following URL and check a page.  
+http:0.0.0.0:8000  
+  
+### Make root user.
+Type following command and setup root user name and password.  
+```shell
+$ docker-compose run web python3 ./manage.py createsuperuser
+```
+Access to following URL and type root user name and password.  
+http:0.0.0.0:8000/admin  
